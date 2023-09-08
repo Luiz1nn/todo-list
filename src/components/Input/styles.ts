@@ -14,5 +14,6 @@ export const styles = StyleSheet.create({
   },
   focused: {
     borderColor: '#5e60ce',
+    borderWidth: 1,
   },
 })
