@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { View } from 'react-native'
 import { Feather } from '@expo/vector-icons'
-import { Button, Header, Input } from '@/components'
+import { Button, Header, Input, List } from '@/components'
 import { styles } from './styles'
 
-type Task = {
+export type Task = {
   id: number
   text: string
   isChecked: boolean
@@ -28,6 +28,24 @@ export const Home = () => {
     setTasks((tasks) => [...tasks, newTask])
   }
 
+  const toggleTaskCheck = (taskIdToBeChecked: number) => {
+    const immutableTasks = tasks.map((task) => ({ ...task }))
+
+    const taskToBeUpdated = immutableTasks.find(
+      (task) => task.id === taskIdToBeChecked,
+    )
+
+    if (taskToBeUpdated) {
+      taskToBeUpdated.isChecked = !taskToBeUpdated.isChecked
+      setTasks(immutableTasks)
+    }
+  }
+
+  const removeTask = (taskIdToBeChecked: number) => {
+    const filteredTasks = tasks.filter((task) => task.id !== taskIdToBeChecked)
+    setTasks(filteredTasks)
+  }
+
   return (
     <View style={styles.container}>
       <Header />
@@ -39,6 +57,12 @@ export const Home = () => {
             <Feather name="plus-circle" size={16} color="#f2f2f2" />
           </Button>
         </View>
+
+        <List
+          data={tasks}
+          removeTask={removeTask}
+          toggleTaskCheck={toggleTaskCheck}
+        />
       </View>
     </View>
   )
