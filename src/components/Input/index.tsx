@@ -1,12 +1,14 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, RefObject, SetStateAction, useState } from 'react'
 import { TextInput } from 'react-native'
 import { styles } from './styles'
 
 type Props = {
+  inputRef: RefObject<TextInput>
   value: string
   onChangeText: Dispatch<SetStateAction<string>>
 }
-export const Input = ({ value, onChangeText }: Props) => {
+
+export const Input = ({ inputRef, value, onChangeText }: Props) => {
   const [isFocused, setIsFocused] = useState(false)
 
   const handleFocus = () => setIsFocused(true)
@@ -15,6 +17,7 @@ export const Input = ({ value, onChangeText }: Props) => {
 
   return (
     <TextInput
+      ref={inputRef}
       value={value}
       onChangeText={onChangeText}
       onFocus={handleFocus}
