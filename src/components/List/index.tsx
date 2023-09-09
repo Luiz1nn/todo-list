@@ -3,6 +3,7 @@ import { Task } from '@/screens'
 import { Empty } from './Empty'
 import { Header } from './Header'
 import { Item } from './Item'
+import { styles } from './styles'
 
 type Props = {
   data: Task[]
@@ -11,7 +12,7 @@ type Props = {
 }
 
 export const List = ({ data, removeTask, toggleTaskCheck }: Props) => (
-  <View>
+  <View style={styles.container}>
     <Header data={data} />
 
     <FlatList
