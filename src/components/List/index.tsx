@@ -1,7 +1,8 @@
+import { FlatList, View } from 'react-native'
 import { Task } from '@/screens'
-import { View } from 'react-native'
 import { Empty } from './Empty'
 import { Header } from './Header'
+import { Item } from './Item'
 
 type Props = {
   data: Task[]
@@ -12,6 +13,19 @@ type Props = {
 export const List = ({ data, removeTask, toggleTaskCheck }: Props) => (
   <View>
     <Header data={data} />
-    <Empty />
+
+    <FlatList
+      data={data}
+      renderItem={({ item }) => (
+        <Item
+          item={item}
+          removeTask={removeTask}
+          toggleTaskCheck={toggleTaskCheck}
+        />
+      )}
+      showsVerticalScrollIndicator={false}
+      ListEmptyComponent={<Empty />}
+      contentContainerStyle={{ paddingBottom: 24 }}
+    />
   </View>
 )
