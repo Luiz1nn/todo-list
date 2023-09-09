@@ -1,6 +1,7 @@
 import { Task } from '@/screens'
 import { View } from 'react-native'
 import { Empty } from './Empty'
+import { Header } from './Header'
 
 type Props = {
   data: Task[]
@@ -10,6 +11,7 @@ type Props = {
 
 export const List = ({ data, removeTask, toggleTaskCheck }: Props) => (
   <View>
+    <Header data={data} />
     <Empty />
   </View>
 )
